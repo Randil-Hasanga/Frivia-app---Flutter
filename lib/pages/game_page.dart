@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frivia/providers/game_page_providers.dart';
+import 'package:html_unescape/html_unescape.dart';
 import 'package:provider/provider.dart';
 
 class GamePage extends StatelessWidget {
-  GamePage({Key? key}) : super(key: key);
+  
   double? _deviceWidth, _deviceHeight;
+
+  final String difficultyLevel;
+  GamePage({required this.difficultyLevel});
 
   GamePageProvider? _pageProvider;
 
@@ -13,7 +19,7 @@ class GamePage extends StatelessWidget {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
-      create: (_context) => GamePageProvider(context: context),
+      create: (_context) => GamePageProvider(context: context, difficultyLevel: difficultyLevel),
       child: _buildUI(),
       
     );
@@ -63,8 +69,12 @@ class GamePage extends StatelessWidget {
   }
 
   Widget _questionText() {
+
+    String question = _pageProvider!.getCurrentQuestionText();
+    String decodedString = HtmlUnescape().convert(question);
+
     return Text(
-      _pageProvider!.getCurrentQuestionText(),
+      decodedString,
       style: const TextStyle(
         color: Colors.white,
         fontSize: 25,

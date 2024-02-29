@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frivia/pages/game_page.dart';
+import 'package:frivia/pages/home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Frivia',
+      title: 'Quizie',
       theme: ThemeData(
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 5, 199, 134)),
@@ -23,9 +25,10 @@ class MyApp extends StatelessWidget {
           1.9,
         ),
         useMaterial3: true,
-        fontFamily: 'ArchitectsDaughter',
+        //fontFamily: 'ArchitectsDaughter',
+        textTheme: GoogleFonts.ubuntuTextTheme(),
       ),
-      home: GamePage(),
+      home: const HomePage(),
     );
   }
 }
